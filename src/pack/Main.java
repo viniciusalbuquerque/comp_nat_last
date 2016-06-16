@@ -7,6 +7,7 @@ public class Main {
 
 	public static int numeroDiasAula = 6;
 	public static int numeroHorariosPorDia = 6;
+	public static int numeroPeixes = 10;
 	public static ArrayList<Professor> professores;
 	public static ArrayList<Disciplina> disciplinas;
 	
