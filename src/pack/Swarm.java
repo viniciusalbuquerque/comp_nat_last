@@ -27,9 +27,6 @@ public class Swarm {
 	public ArrayList<Peixe> getPeixes() {
 		return peixes;
 	}
-	
-	
-	
 
 	public Swarm(){
 		this.peixes = new ArrayList<Peixe>();

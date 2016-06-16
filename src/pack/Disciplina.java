@@ -9,4 +9,8 @@ public class Disciplina {
 		this.nome = nome;
 		this.professor = professor;
 	}
+	
+	public Professor getProfessor() {
+		return professor;
+	}
 }

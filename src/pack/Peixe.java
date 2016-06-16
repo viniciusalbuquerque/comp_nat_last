@@ -8,6 +8,7 @@ public class Peixe {
 	private double fitness;	
 	private double cons = 10;
 	private int numSalasDisponiveis;
+	private static int punicao = 100;
 	
 	public Peixe(int numSalasDisponiveis) {
 		this.grade = new Horario[Main.numeroDiasAula][Main.numeroHorariosPorDia];
@@ -26,7 +27,7 @@ public class Peixe {
 				int coluna = Main.generator.nextInt(Main.numeroDiasAula);
 				
 				if(this.grade[linha][coluna].getDisciplinas().size() < numSalasDisponiveis) {
-					this.grade[linha][coluna].getDisciplinas().add(disciplina);
+					this.grade[linha][coluna].addDisciplina(disciplina);
 					addedDisciplina = true;
 				}
 				
@@ -36,12 +37,25 @@ public class Peixe {
 
 	private void calcularFitness(){
 		fitness = 0;
+		boolean conflito = false;
 		for(int i = 0; i < grade.length; i++) {
 			fitness += (i*Swarm.razaoX) + (grade[i].length - 1) * Swarm.razaoY;
+			if(!conflito) {
+				for(int j = 0; j < grade[i].length; j++) {
+					if(grade[i][j].checkConflitoProfessor()) {
+						conflito = true;
+					}
+				}
+			}
 		}
 		fitness = cons / fitness;
-		this.fitness = 0;
+		
+		if(conflito) {
+			fitness *= punicao;
+		}
+		
 	}
+	
 	
 	public Horario[][] getGrade(){
 		return this.grade;
