@@ -13,4 +13,9 @@ public class Disciplina {
 	public Professor getProfessor() {
 		return professor;
 	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
 }

@@ -24,6 +24,7 @@ public class Horario {
 	
 	public boolean checkConflitoProfessor() {
 		for(Professor prof : this.professores) {
+//			System.out.println(Collections.frequency(this.professores, prof));
 			if(Collections.frequency(this.professores, prof) > 1) {
 				return true;
 			}
