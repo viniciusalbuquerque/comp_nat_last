@@ -31,4 +31,9 @@ public class Horario {
 		}
 		return false;
 	}
+	
+	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	
 }

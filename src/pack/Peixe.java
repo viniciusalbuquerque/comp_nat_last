@@ -69,32 +69,38 @@ public class Peixe {
 	// }
 
 	public static Horario[] getColumn(Horario[][] array, int index) {
-		Horario[] column = new Horario[array[0].length];																// 2D array!
-		for (int i = 0; i < column.length; i++) {
-			column[i] = array[i][index];
+		if(array[index] != null) {
+			Horario[] column = new Horario[array[index].length];
+			for (int i = 0; i < column.length; i++) {
+				column[i] = array[index][i];
+//				System.out.println(column[i].getDisciplinas().get(i).getNome());
+			}
+			return column;	
 		}
-		return column;
+		return null;
 	}
 
-	private void calcularFitness() {
+	public void calcularFitness() {
 		boolean conflito = false;
 		for (int i = 0; i < grade.length; i++) {
-			int indexOfLastClass = getLastClassIndex(getColumn(grade, i));
-			System.out.println(indexOfLastClass);
-			if (indexOfLastClass >= 0) {
-				fitness += (i * Swarm.razaoX) + (grade[i].length - 1)
-						* Math.pow(Swarm.razaoY, indexOfLastClass);
-				for (int j = 0; j < grade[i].length; j++) {
-					if (grade[i][j] != null) {
-						if (grade[i][j].checkConflitoProfessor()) {
-							conflito = true;
+			Horario[] horarios = getColumn(grade, i);
+			if(horarios != null) {
+				int indexOfLastClass = getLastClassIndex(horarios);
+//				System.out.println(indexOfLastClass);
+				if (indexOfLastClass >= 0) {
+					fitness += (i * Swarm.razaoX) + (grade[i].length - 1)
+							* Math.pow(Swarm.razaoY, indexOfLastClass);
+					for (int j = 0; j < grade[i].length; j++) {
+						if (grade[i][j] != null) {
+							if (grade[i][j].checkConflitoProfessor()) {
+								conflito = true;
+							}
 						}
 					}
-				}
-			} else {
-//				System.out.println("test");
+				} else {
+//					System.out.println("test");
+				}	
 			}
-
 		}
 		if (conflito) {
 			fitness = Double.MAX_VALUE;
@@ -104,11 +110,11 @@ public class Peixe {
 	}
 
 	private int getLastClassIndex(Horario[] horarios) {
-		System.out.println(horarios.length);
-		for (int i = horarios.length - 1; i > 0; i--) {
+//		System.out.println(horarios.length);
+		for (int i = horarios.length - 1; i >= 0; i--) {
 			if (horarios[i] != null) {
 //				System.out.println(i);
-//				return i;
+				return i;
 			}
 		}
 		return -1;

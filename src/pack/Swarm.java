@@ -60,8 +60,13 @@ public class Swarm {
 		}
 	}
 	
-	private void move() {
+	private void individual() {
 		movimentoIndividual();
+		swapIndividual();
+	}
+	
+	private void move() {
+		individual();
 		movimentoPior();
 		movimentoMelhor();
 	}
@@ -87,18 +92,6 @@ public class Swarm {
 			int linha2 = Main.generator.nextInt(Main.numeroHorariosPorDia);
 			
 			Horario[][] grade = peixe.getGrade().clone();
-			
-//			if(grade[linha1][coluna1] == null) {
-//				System.out.println("null");
-//			} else {
-//				System.out.println(grade[linha1][coluna1].getDisciplinas().size());
-//			}
-//			if(grade[linha2][coluna2] == null) {
-//				System.out.println("null");
-//			} else {
-//				System.out.println(grade[linha2][coluna2].getDisciplinas().size());
-//			}
-//			
 			
 			Horario horario1 = grade[linha1][coluna1];
 			grade[linha1][coluna1] = grade[linha2][coluna2];
@@ -137,8 +130,16 @@ public class Swarm {
 			int coluna2 = Main.generator.nextInt(Main.numeroDiasAula);
 			int linha2 = Main.generator.nextInt(Main.numeroHorariosPorDia); 
 			
-			ArrayList<Disciplina> disciplinas1 = peixe.getGrade()[coluna1][linha1].getDisciplinas();
-			ArrayList<Disciplina> disciplinas2 = peixe.getGrade()[coluna2][linha2].getDisciplinas();
+			Horario horario = peixe.getGrade()[linha1][coluna1];
+			if(horario == null) {
+				horario = new Horario();
+			}
+			ArrayList<Disciplina> disciplinas1 = horario.getDisciplinas();
+			Horario horario2 = peixe.getGrade()[linha2][coluna2];
+			if(horario2 == null) {
+				horario2 = new Horario();
+			}
+			ArrayList<Disciplina> disciplinas2 = horario2.getDisciplinas();
 			
 			Disciplina disciplina1 = null;
 			Disciplina disciplina2 = null;
@@ -148,6 +149,7 @@ public class Swarm {
 				disciplina1 = disciplinas1.get(index);
 				
 				disciplinas1.remove(disciplina1);
+				
 			}
 			
 			if(!disciplinas2.isEmpty()){
@@ -163,6 +165,28 @@ public class Swarm {
 			
 			if(disciplina1 != null){
 				disciplinas2.add(disciplina1);
+			}
+			
+			Peixe peixe2 = peixe;
+			if(disciplinas1.isEmpty()) {
+				peixe2.getGrade()[linha1][coluna1] = null;
+			} else {
+				horario.setDisciplinas(disciplinas1);
+				peixe2.getGrade()[linha1][coluna1] = horario;
+			}
+			
+			if(disciplinas2.isEmpty()) {
+				peixe2.getGrade()[linha2][coluna2] = null;
+			} else {
+				horario2.setDisciplinas(disciplinas2);
+				peixe2.getGrade()[linha2][coluna2] = horario2;
+			}
+			
+			peixe2.calcularFitness();
+			
+			if(peixe.isBetterFitness(peixe2.getFitness())) {
+				System.out.println("testetestesteste");
+				peixe = peixe2;
 			}
 		}
 	}

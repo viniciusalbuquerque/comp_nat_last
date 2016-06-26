@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class Main {
 
-	public static int numeroDiasAula = 1;
-	public static int numeroHorariosPorDia = 3;
-	public static int numeroSalas = 5;
-	public static int numeroPeixes = 10;
+	public static int numeroDiasAula = 5;
+	public static int numeroHorariosPorDia = 5;
+	public static int numeroSalas = 3;
+	public static int numeroPeixes = 50;
 	public static ArrayList<Professor> professores;
 	public static ArrayList<Disciplina> disciplinas;
 	
