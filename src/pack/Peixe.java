@@ -68,7 +68,7 @@ public class Peixe {
 	//
 	// }
 
-	public static Horario[] getColumn(Horario[][] array, int index) {
+	public static Horario[] getColumn2(Horario[][] array, int index) {
 		if(array[index] != null) {
 			Horario[] column = new Horario[array[index].length];
 			for (int i = 0; i < column.length; i++) {
@@ -79,8 +79,55 @@ public class Peixe {
 		}
 		return null;
 	}
+	
+	public static Horario[] getColumn(Horario[][] array, int index) {
+		if(array[index] != null) {
+			Horario[] column = new Horario[array.length];
+			for (int i = 0; i < column.length; i++) {
+				column[i] = array[i][index];
+//				System.out.println(column[i].getDisciplinas().get(i).getNome());
+			}
+			return column;	
+		}
+		return null;
+	}
 
+	private boolean checarConflito() {
+		for(int i = 0; i < grade.length; i++) {
+			for(int j = 0; j < grade[0].length; j++) {
+				if(grade[i][j] != null) {
+					if(grade[i][j].checkConflitoProfessor()) {
+						return true;
+					}	
+				}
+			}
+		}
+		return false;
+	}
+	
 	public void calcularFitness() {
+		boolean conflito = checarConflito();
+		
+		if(!conflito) {
+			for(int i = 0; i < grade[0].length; i++) {
+				Horario[] horarios = getColumn2(grade, i);
+				if(horarios != null) {
+					int indexOfLastClass = getLastClassIndex(horarios);
+					if(indexOfLastClass >= 0) {
+						fitness += (i * Swarm.razaoX) + (grade[i].length - 1)
+								* Math.pow(Swarm.razaoY, indexOfLastClass);
+					}
+				}
+			}
+			fitness = CONS / fitness;
+		} else {
+			fitness = Double.MAX_VALUE;
+		}
+		
+	}
+	
+	//Esse é o calculo antigo do fitness.. Troquei porque achei que não estava na ideia que a gente queria...
+	public void calcularFitness2() {
 		boolean conflito = false;
 		for (int i = 0; i < grade.length; i++) {
 			Horario[] horarios = getColumn(grade, i);
