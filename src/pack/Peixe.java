@@ -110,7 +110,7 @@ public class Peixe {
 		
 		if(!conflito) {
 			for(int i = 0; i < grade[0].length; i++) {
-				Horario[] horarios = getColumn2(grade, i);
+				Horario[] horarios = getColumn(grade, i);
 				if(horarios != null) {
 					int indexOfLastClass = getLastClassIndex(horarios);
 					if(indexOfLastClass >= 0) {
