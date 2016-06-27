@@ -60,15 +60,18 @@ public class Swarm {
 		}
 	}
 	
-	private void individual() {
-		movimentoIndividual();
-		swapIndividual();
+	private Peixe individual(Peixe peixe) {
+		Peixe peixe2 = movimentoIndividual(peixe);
+		return swapIndividual(peixe2);
 	}
 	
 	private void move() {
-		individual();
-		movimentoPior();
-		movimentoMelhor();
+		for(Peixe peixe : this.peixes) {
+			peixe =  individual(peixe);
+			peixe = movimentoPior(peixe);
+			peixe = movimentoMelhor(peixe);	
+		}
+		
 	}
 	
 	public ArrayList<Peixe> getPeixes() {
@@ -83,8 +86,8 @@ public class Swarm {
 //		}
 //	}
 	
-	private void movimentoIndividual() {
-		for(Peixe peixe : this.peixes) {
+	private Peixe movimentoIndividual(Peixe peixe) {
+//		for(Peixe peixe : this.peixes) {
 			int coluna1 = Main.generator.nextInt(Main.numeroDiasAula);
 			int linha1 = Main.generator.nextInt(Main.numeroHorariosPorDia); 
 			
@@ -102,28 +105,33 @@ public class Swarm {
 			if(peixe.isBetterFitness(auxPeixe.getFitness())) {
 				peixe = auxPeixe;
 			}
-		}
+			
+			return peixe;
+		
+//		}
 	}
 	
-	private void movimentoMelhor() {
-		for(Peixe peixe : this.peixes) {
-			if(peixe != melhorPeixe) {
-				
-			}
-		}
+	private Peixe movimentoMelhor(Peixe peixe) {
+//		for(Peixe peixe : this.peixes) {
+//			if(peixe != melhorPeixe) {
+//				
+//			}
+//		}
+		return peixe;
 	}
 	
-	private void movimentoPior() {
-		for(Peixe peixe : this.peixes) {
-			if(peixe != melhorPeixe) {
-				
-			}
-		}
+	private Peixe movimentoPior(Peixe peixe) {
+//		for(Peixe peixe : this.peixes) {
+//			if(peixe != melhorPeixe) {
+//				
+//			}
+//		}
+		return peixe;
 	}
 	
 	
-	private void swapIndividual(){
-		for(Peixe peixe : this.peixes){
+	private Peixe swapIndividual(Peixe peixe){
+//		for(Peixe peixe : this.peixes){
 			int coluna1 = Main.generator.nextInt(Main.numeroDiasAula);
 			int linha1 = Main.generator.nextInt(Main.numeroHorariosPorDia); 
 			
@@ -188,7 +196,9 @@ public class Swarm {
 				System.out.println("testetestesteste");
 				peixe = peixe2;
 			}
-		}
+			
+			return peixe;
+//		}
 	}
 	
 	public Peixe getMelhorPeixe() {
