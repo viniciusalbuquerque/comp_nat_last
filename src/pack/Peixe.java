@@ -6,7 +6,7 @@ public class Peixe {
 
 	private Horario[][] grade;
 	private double fitness;
-	private static final double CONS = 10;
+	private static final double CONS = 1000;
 	private int numSalasDisponiveis;
 	// private static int punicao = 1000;
 	private ArrayList<Disciplina> disciplinas;
@@ -107,7 +107,7 @@ public class Peixe {
 	
 	public void calcularFitness() {
 		boolean conflito = checarConflito();
-		
+		double fitness = 0;
 		if(!conflito) {
 			for(int i = 0; i < grade[0].length; i++) {
 				Horario[] horarios = getColumn(grade, i);
@@ -119,9 +119,9 @@ public class Peixe {
 					}
 				}
 			}
-			fitness = CONS / fitness;
+			this.fitness = fitness / CONS;
 		} else {
-			fitness = Double.MAX_VALUE;
+			this.fitness = Double.MAX_VALUE;
 		}
 		
 	}
@@ -167,6 +167,29 @@ public class Peixe {
 		return -1;
 	}
 
+	public int distanciaProMelhor(Peixe melhorPeixe) {
+		int dist = 0;
+//		Horario[][] gradePeixe = peixe.getGrade();
+		Horario[][] gradeMelhorPeixe = melhorPeixe.getGrade();
+		for(int i = 0; i < this.grade.length; i++) {
+			for(int j = 0; j < this.grade[0].length; j++) {
+				Horario horarioPeixe = this.grade[i][j];
+				if(horarioPeixe != null) {
+//					ArrayList<Disciplina> disciplinasPeixe = horarioPeixe.getDisciplinas();
+					if(gradeMelhorPeixe[i][j] != null) {
+						dist += horarioPeixe.distancia(gradeMelhorPeixe[i][j].getDisciplinas());
+//						dist += gradeMelhorPeixe[i][j].distancia(disciplinasPeixe);
+					}	
+				} else {
+					if(gradeMelhorPeixe[i][j] != null) {
+						dist += gradeMelhorPeixe[i][j].getDisciplinas().size();
+					}		
+				}
+			}
+		}
+		return dist;
+	}
+	
 	public boolean isBetterFitness(double fitness) {
 		return fitness < this.fitness;
 	}

@@ -62,7 +62,6 @@ public class Swarm {
 	
 	private void individual() {
 		movimentoIndividual();
-		swapIndividual();
 	}
 	
 	private void move() {
@@ -101,29 +100,86 @@ public class Swarm {
 			
 			if(peixe.isBetterFitness(auxPeixe.getFitness())) {
 				peixe = auxPeixe;
-			}
+				System.out.println("1dsa123213");
+			}	
+			peixe = swapIndividual(peixe);
 		}
 	}
+	
+	
 	
 	private void movimentoMelhor() {
 		for(Peixe peixe : this.peixes) {
 			if(peixe != melhorPeixe) {
-				
+				int dist = peixe.distanciaProMelhor(this.melhorPeixe);
+				int countDeslocamentoDisciplinas = 0;
+				Horario[][] gradePeixe = peixe.getGrade();
+//				Horario[][] gradeMelhorPeixe = this.melhorPeixe.getGrade();
+				for(int i = 0; i < gradePeixe.length && countDeslocamentoDisciplinas < 2*dist/3; i++) {
+					for(int j = 0; j < gradePeixe[0].length; j++) {
+						Horario horarioPeixe = gradePeixe[i][j];
+						ArrayList<Disciplina> disciplinasParaOMelhor = new ArrayList<Disciplina>();
+						if(horarioPeixe != null) {
+							disciplinasParaOMelhor = horarioPeixe.getDisciplinasParaOMelhor();							
+						} else {
+							Horario horarioMelhorPeixe = this.melhorPeixe.getGrade()[i][j];
+							if(horarioMelhorPeixe != null) {
+								disciplinasParaOMelhor = horarioMelhorPeixe.getDisciplinas();	
+							}
+						}
+						horarioPeixe = swapDisciplinasParaOMelhor(disciplinasParaOMelhor, gradePeixe, horarioPeixe);
+						if(disciplinasParaOMelhor != null && disciplinasParaOMelhor.size() > 0) {
+							countDeslocamentoDisciplinas++;	
+						}
+					}
+				}
 			}
 		}
 	}
 	
+	private Horario swapDisciplinasParaOMelhor(
+			ArrayList<Disciplina> disciplinasParaOMelhor,
+			Horario[][] gradePeixe, Horario horarioPeixe) {
+
+		if(disciplinasParaOMelhor != null && disciplinasParaOMelhor.size() > 0) {
+			if(horarioPeixe == null) {
+				horarioPeixe = new Horario();
+			}
+			for(Disciplina disc : disciplinasParaOMelhor) {
+				boolean added = false;
+				for(int i = 0; i < gradePeixe.length; i++) {
+					for(int j = 0; j < gradePeixe[0].length; j++) {
+						Horario tempHorario = gradePeixe[i][j];
+						if(tempHorario != null) {
+							if(tempHorario.getDisciplinas().contains(disc)) {
+								tempHorario.getDisciplinas().remove(disc);
+								horarioPeixe.addDisciplina(disc);
+								added = true;
+								break;
+							}		
+						}				
+					}
+					if(added) {
+						break;
+					}
+				}
+			}
+			return horarioPeixe;
+		}
+		return null;
+	}
+
 	private void movimentoPior() {
-		for(Peixe peixe : this.peixes) {
-			if(peixe != melhorPeixe) {
-				
-			}
-		}
+//		for(Peixe peixe : this.peixes) {
+//			if(peixe != melhorPeixe) {
+//				
+//			}
+//		}
 	}
 	
 	
-	private void swapIndividual(){
-		for(Peixe peixe : this.peixes){
+	private Peixe swapIndividual(Peixe peixe){
+//		for(Peixe peixe : this.peixes){
 			int coluna1 = Main.generator.nextInt(Main.numeroDiasAula);
 			int linha1 = Main.generator.nextInt(Main.numeroHorariosPorDia); 
 			
@@ -167,7 +223,9 @@ public class Swarm {
 				disciplinas2.add(disciplina1);
 			}
 			
-			Peixe peixe2 = peixe;
+			
+			Peixe peixe2 = new Peixe(peixe.getGrade().clone());
+//			Peixe peixe2 = peixe;
 			if(disciplinas1.isEmpty()) {
 				peixe2.getGrade()[linha1][coluna1] = null;
 			} else {
@@ -188,7 +246,8 @@ public class Swarm {
 				System.out.println("testetestesteste");
 				peixe = peixe2;
 			}
-		}
+//		}
+			return peixe;
 	}
 	
 	public Peixe getMelhorPeixe() {
@@ -197,6 +256,7 @@ public class Swarm {
 	}
 	
 	public Peixe getPiorPeixe() {
+		checkPiorPeixe();
 		return piorPeixe;
 	}
 }

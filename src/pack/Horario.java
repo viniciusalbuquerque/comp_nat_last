@@ -7,6 +7,7 @@ public class Horario {
 
 	private ArrayList<Disciplina> disciplinas;
 	private ArrayList<Professor> professores;
+	private ArrayList<Disciplina> disciplinasParaOMelhor;
 	
 	public Horario(){
 		this.disciplinas = new ArrayList<Disciplina>();
@@ -34,6 +35,22 @@ public class Horario {
 	
 	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
+	}
+	
+	public int distancia(ArrayList<Disciplina> disc) {
+		this.disciplinasParaOMelhor = new ArrayList<>();
+		int dist = 0;
+		for(Disciplina disciplina : disc) {
+			if(!this.disciplinas.contains(disciplina)) {
+				this.disciplinasParaOMelhor.add(disciplina);
+				dist++;
+			}
+		}
+		return dist;
+	}
+	
+	public ArrayList<Disciplina> getDisciplinasParaOMelhor() {
+		return disciplinasParaOMelhor;
 	}
 	
 }

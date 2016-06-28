@@ -1,30 +1,22 @@
 package pack;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
 
-	private static final String FILENAME = "/Users/Vinicius/Documents/workspace/comp_nat/grade.txt";
+//	private static final String FILENAME = "/Users/Vinicius/Documents/workspace/comp_nat/grade.txt";
 	
-	public static int numeroDiasAula = 2;
-	public static int numeroHorariosPorDia = 3;
+	public static int numeroDiasAula = 3;
+	public static int numeroHorariosPorDia = 5;
 	public static int numeroSalas = 5;
 	public static int numeroPeixes = 50;
 	public static ArrayList<Professor> professores;
 	public static ArrayList<Disciplina> disciplinas;
 	
 	public static final int NUM_ITERACOES = 1000;
-	private static BufferedWriter bw;
+//	private static BufferedWriter bw;
 	
 	public static Random generator = new Random();
 	
@@ -55,26 +47,30 @@ public class Main {
 		Swarm swarm = new Swarm(numeroPeixes, numeroSalas, disciplinas);
 		swarm.start(NUM_ITERACOES);
 		
-		File file = new File(FILENAME);
-        FileWriter fw = new FileWriter(file.getAbsolutePath());
-        bw = new BufferedWriter(fw);
+//		File file = new File(FILENAME);
+//        FileWriter fw = new FileWriter(file.getAbsolutePath());
+//        bw = new BufferedWriter(fw);
         
 		
-		Peixe p = swarm.getMelhorPeixe();
-		printPeixe(p);
+		for(Peixe p : swarm.getPeixes()) {
+			printPeixe(p);
+		}
+		
+//		Peixe p = swarm.getMelhorPeixe();
+//		printPeixe(p);
+////		writePeixe(p);
+//		
+//		p = swarm.getPiorPeixe();
+//		printPeixe(p);
 //		writePeixe(p);
 		
-		p = swarm.getPiorPeixe();
-		printPeixe(p);
-//		writePeixe(p);
-		
-		bw.close();
+//		bw.close();
 		
 	}
 	
-	private static void writePeixe(Peixe p) throws IOException {
-		
-	}
+//	private static void writePeixe(Peixe p) throws IOException {
+//		
+//	}
 	
 	private static void inicializarVariaveis(){
 		professores = new ArrayList<Professor>();
