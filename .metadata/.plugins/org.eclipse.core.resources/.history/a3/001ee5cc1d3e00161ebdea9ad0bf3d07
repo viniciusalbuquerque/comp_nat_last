@@ -166,15 +166,6 @@ public class Swarm {
 						Horario[][] gradeFinal = peixe.getGrade().clone();
 						
 						if(qtdDisciplinasInicial != qtdDisciplinasFinal){
-							System.out.println("\n\n\n\n########################################");
-							System.out.println("\n\n\n\nERRO!!!");
-							System.out.println("########################################");
-							System.out.println("\nPeixe inicial:\n");
-							Main.printPeixe(new Peixe(gradeInicial));
-
-							System.out.println("\nPeixe final:\n");
-							Main.printPeixe(new Peixe(gradeFinal));
-							
 							lancarExcecaoMudancaQtdDisciplinas(qtdDisciplinasInicial,
 									qtdDisciplinasFinal, "movimento coletivo convergente");
 						}

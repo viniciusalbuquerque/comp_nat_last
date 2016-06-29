@@ -48,7 +48,7 @@ public class Main {
 		
 	}
 	
-	public static void printPeixe(Peixe p) {
+	private static void printPeixe(Peixe p) {
 		
 		System.out.println(p.getFitness());
 		Horario grade[][] = p.getGrade();

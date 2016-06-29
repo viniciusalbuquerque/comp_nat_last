@@ -42,10 +42,10 @@ public class Horario {
 		this.disciplinas = disciplinas;
 	}
 	
-	public int distancia(ArrayList<Disciplina> disciplinasMelhorPeixe) {
+	public int distancia(ArrayList<Disciplina> disc) {
 		this.disciplinasParaOMelhor = new ArrayList<>();
 		int dist = 0;
-		for(Disciplina disciplina : disciplinasMelhorPeixe) {
+		for(Disciplina disciplina : disc) {
 			if(!this.disciplinas.contains(disciplina)) {
 				this.disciplinasParaOMelhor.add(disciplina);
 				dist++;

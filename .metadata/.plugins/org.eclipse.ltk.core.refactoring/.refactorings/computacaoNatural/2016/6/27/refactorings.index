@@ -2,3 +2,5 @@
 1467213323481	Rename method 'movimentoMelhor'
 1467213563581	Rename local variable 'disc'
 1467217980813	Extract method 'lancarExcecaoMudancaQtdDisciplinas'
+1467219071993	Rename method 'distanciaProMelhor'
+1467220303255	Rename local variable 'disc'

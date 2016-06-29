@@ -174,7 +174,7 @@ public class Peixe {
 		return -1;
 	}
 
-	public int distanciaParaMelhorPeixe(Peixe melhorPeixe) {
+	public int distanciaProMelhor(Peixe melhorPeixe) {
 		int dist = 0;
 //		Horario[][] gradePeixe = peixe.getGrade();
 		Horario[][] gradeMelhorPeixe = melhorPeixe.getGrade();

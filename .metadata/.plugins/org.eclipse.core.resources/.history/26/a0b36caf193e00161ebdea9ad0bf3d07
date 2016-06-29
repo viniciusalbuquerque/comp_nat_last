@@ -128,11 +128,10 @@ public class Swarm {
 		for(Peixe peixe : this.peixes) {
 			
 			int qtdDisciplinasInicial = peixe.getQuantidadeDisciplinas();
-			Horario[][] gradeInicial = peixe.getGrade().clone();
 			
 			if(peixe != melhorPeixe) {
 				
-				int distanciaParaMelhorPeixe = peixe.distanciaParaMelhorPeixe(this.melhorPeixe);
+				int distanciaParaMelhorPeixe = peixe.distanciaProMelhor(this.melhorPeixe);
 				int countDeslocamentoDisciplinas = 0;
 				Horario[][] gradePeixe = peixe.getGrade();
 //				Horario[][] gradeMelhorPeixe = this.melhorPeixe.getGrade();
@@ -156,36 +155,25 @@ public class Swarm {
 							}
 						}
 						
-						swapDisciplinasParaOMelhor(disciplinasParaOMelhor, gradePeixe, horarioPeixe);
+						horarioPeixe = swapDisciplinasParaOMelhor(disciplinasParaOMelhor, gradePeixe, horarioPeixe);
 						
 						if(disciplinasParaOMelhor != null && disciplinasParaOMelhor.size() > 0) {
 							countDeslocamentoDisciplinas++;	
-						}
-
-						int qtdDisciplinasFinal = peixe.getQuantidadeDisciplinas();
-						Horario[][] gradeFinal = peixe.getGrade().clone();
-						
-						if(qtdDisciplinasInicial != qtdDisciplinasFinal){
-							System.out.println("\n\n\n\n########################################");
-							System.out.println("\n\n\n\nERRO!!!");
-							System.out.println("########################################");
-							System.out.println("\nPeixe inicial:\n");
-							Main.printPeixe(new Peixe(gradeInicial));
-
-							System.out.println("\nPeixe final:\n");
-							Main.printPeixe(new Peixe(gradeFinal));
-							
-							lancarExcecaoMudancaQtdDisciplinas(qtdDisciplinasInicial,
-									qtdDisciplinasFinal, "movimento coletivo convergente");
 						}
 					}
 				}
 			}
 
+			int qtdDisciplinasFinal = peixe.getQuantidadeDisciplinas();
+			
+			if(qtdDisciplinasInicial != qtdDisciplinasFinal){
+				lancarExcecaoMudancaQtdDisciplinas(qtdDisciplinasInicial,
+						qtdDisciplinasFinal, "movimento coletivo convergente");
+			}
 		}
 	}
 	
-	private void swapDisciplinasParaOMelhor(
+	private Horario swapDisciplinasParaOMelhor(
 			ArrayList<Disciplina> disciplinasParaOMelhor,
 			Horario[][] gradePeixe, Horario horarioPeixe) {
 
@@ -220,7 +208,9 @@ public class Swarm {
 					}
 				}
 			}
+			return horarioPeixe;
 		}
+		return null;
 	}
 
 	private void movimentoColetivoDivergente() {
