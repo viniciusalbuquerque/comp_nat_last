@@ -23,6 +23,11 @@ public class Horario {
 		professores.add(disciplina.getProfessor());
 	}
 	
+	public void removeDisciplina(Disciplina disciplina) {
+		disciplinas.remove(disciplina);
+		professores.remove(disciplina.getProfessor());
+	}
+	
 	public boolean checkConflitoProfessor() {
 		for(Professor prof : this.professores) {
 //			System.out.println(Collections.frequency(this.professores, prof));

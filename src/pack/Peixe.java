@@ -9,14 +9,13 @@ public class Peixe {
 	private static final double CONS = 1000;
 	private int numSalasDisponiveis;
 	// private static int punicao = 1000;
-	private ArrayList<Disciplina> disciplinas;
 
 	public Peixe(int numSalasDisponiveis, ArrayList<Disciplina> disciplinas) {
 		fitness = Double.MAX_VALUE;
-		this.disciplinas = disciplinas;
 		this.grade = new Horario[Main.numeroHorariosPorDia][Main.numeroDiasAula];
 		this.numSalasDisponiveis = numSalasDisponiveis;
-		this.gerarGradeHorarioAleatoria();
+		this.inicializarGrade();
+		this.gerarGradeHorarioAleatoria(disciplinas);
 		this.calcularFitness();
 	}
 
@@ -25,9 +24,17 @@ public class Peixe {
 		this.calcularFitness();
 	}
 
-	private void gerarGradeHorarioAleatoria() {
-		// ArrayList<Disciplina> disciplinas = (ArrayList<Disciplina>)
-		// Main.disciplinas.clone();
+	private void inicializarGrade() {
+
+		for(int i = 0; i < this.grade.length; i++){
+			for(int j = 0; j < this.grade[0].length; j++){
+				this.grade[i][j] = new Horario();
+			}
+		}
+	}
+
+	private void gerarGradeHorarioAleatoria(ArrayList<Disciplina> disciplinas) {
+
 		for (Disciplina disciplina : disciplinas) {
 			boolean addedDisciplina = false;
 			while (!addedDisciplina) {
@@ -188,6 +195,21 @@ public class Peixe {
 			}
 		}
 		return dist;
+	}
+	
+	public int getQuantidadeDisciplinas(){
+		int quantidadeDisciplinas = 0;
+		
+		for(int i = 0; i < this.grade.length; i++){
+			for(int j = 0; j < this.grade[0].length; j++){
+				if(this.grade[i][j] != null 
+						&& this.grade[i][j].getDisciplinas() != null){
+					quantidadeDisciplinas += this.grade[i][j].getDisciplinas().size();
+				}
+			}
+		}
+		
+		return quantidadeDisciplinas;
 	}
 	
 	public boolean isBetterFitness(double fitness) {

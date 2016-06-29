@@ -20,27 +20,6 @@ public class Main {
 	
 	public static Random generator = new Random();
 	
-	private static void printPeixe(Peixe p) {
-		System.out.println(p.getFitness());
-		Horario grade[][] = p.getGrade();
-		for(int i = 0; i < grade.length; i++) {
-			System.out.println("Horario " + i);
-			for(int j = 0; j < grade[0].length; j++) {
-				Horario horario = grade[i][j];
-				if(horario != null) {
-					System.out.print("Dia " + String.valueOf(j) + " - ");
-					for(int k = 0; k < horario.getDisciplinas().size(); k++) {
-						Disciplina d = horario.getDisciplinas().get(k);
-						System.out.print(d.getNome() + " ");	
-					}
-					System.out.println();
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-	
 	public static void main(String[] args) throws IOException {
 		inicializarVariaveis();
 		
@@ -51,8 +30,9 @@ public class Main {
 //        FileWriter fw = new FileWriter(file.getAbsolutePath());
 //        bw = new BufferedWriter(fw);
         
+		ArrayList<Peixe> peixes = swarm.getPeixes();
 		
-		for(Peixe p : swarm.getPeixes()) {
+		for(Peixe p : peixes) {
 			printPeixe(p);
 		}
 		
@@ -66,6 +46,37 @@ public class Main {
 		
 //		bw.close();
 		
+	}
+	
+	private static void printPeixe(Peixe p) {
+		
+		System.out.println(p.getFitness());
+		Horario grade[][] = p.getGrade();
+		
+		for(int i = 0; i < grade.length; i++) {
+			
+			System.out.println("Horario " + i);
+			
+			for(int j = 0; j < grade[0].length; j++) {
+				
+				Horario horario = grade[i][j];
+				
+				if(horario != null) {
+					
+					System.out.print("Dia " + j + " - ");
+					
+					for(int k = 0; k < horario.getDisciplinas().size(); k++) {
+						
+						Disciplina d = horario.getDisciplinas().get(k);
+						System.out.print(d.getNome() + " ");	
+					}
+					
+					System.out.println();
+				}
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 	
 //	private static void writePeixe(Peixe p) throws IOException {

@@ -60,14 +60,10 @@ public class Swarm {
 		}
 	}
 	
-	private void individual() {
-		movimentoIndividual();
-	}
-	
 	private void move() {
-		individual();
-		movimentoPior();
-		movimentoMelhor();
+		movimentoIndividual();
+		movimentoColetivoDivergente();
+		movimentoColetivoConvergente();
 	}
 	
 	public ArrayList<Peixe> getPeixes() {
@@ -84,13 +80,18 @@ public class Swarm {
 	
 	private void movimentoIndividual() {
 		for(Peixe peixe : this.peixes) {
+			
+			int qtdDisciplinasInicial = peixe.getQuantidadeDisciplinas();
+			
 			int coluna1 = Main.generator.nextInt(Main.numeroDiasAula);
 			int linha1 = Main.generator.nextInt(Main.numeroHorariosPorDia); 
 			
 			int coluna2 = Main.generator.nextInt(Main.numeroDiasAula);
 			int linha2 = Main.generator.nextInt(Main.numeroHorariosPorDia);
 			
-			Horario[][] grade = peixe.getGrade().clone();
+			Horario[][] gradeOriginal = peixe.getGrade();
+			
+			Horario[][] grade = gradeOriginal.clone();
 			
 			Horario horario1 = grade[linha1][coluna1];
 			grade[linha1][coluna1] = grade[linha2][coluna2];
@@ -103,36 +104,71 @@ public class Swarm {
 				System.out.println("1dsa123213");
 			}	
 			peixe = swapIndividual(peixe);
+			
+			int qtdDisciplinasFinal = peixe.getQuantidadeDisciplinas();
+			
+			if(qtdDisciplinasInicial != qtdDisciplinasFinal){
+				lancarExcecaoMudancaQtdDisciplinas(qtdDisciplinasInicial,
+						qtdDisciplinasFinal, "movimento individual");
+			}
 		}
+	}
+
+	private void lancarExcecaoMudancaQtdDisciplinas(int qtdDisciplinasInicial,
+			int qtdDisciplinasFinal, String trechoEmQueOcorreu) throws RuntimeException {
+		String mensagem = "Quantidade de disciplinas mudou em: " + trechoEmQueOcorreu;
+		mensagem += "\n\nInicial: " + qtdDisciplinasInicial;
+		mensagem += "\n\nFinal: " + qtdDisciplinasFinal;
+		throw new RuntimeException(mensagem);
 	}
 	
 	
 	
-	private void movimentoMelhor() {
+	private void movimentoColetivoConvergente() {
 		for(Peixe peixe : this.peixes) {
+			
+			int qtdDisciplinasInicial = peixe.getQuantidadeDisciplinas();
+			
 			if(peixe != melhorPeixe) {
+				
 				int dist = peixe.distanciaProMelhor(this.melhorPeixe);
 				int countDeslocamentoDisciplinas = 0;
 				Horario[][] gradePeixe = peixe.getGrade();
 //				Horario[][] gradeMelhorPeixe = this.melhorPeixe.getGrade();
+				
 				for(int i = 0; i < gradePeixe.length && countDeslocamentoDisciplinas < 2*dist/3; i++) {
+					
 					for(int j = 0; j < gradePeixe[0].length; j++) {
+						
 						Horario horarioPeixe = gradePeixe[i][j];
 						ArrayList<Disciplina> disciplinasParaOMelhor = new ArrayList<Disciplina>();
-						if(horarioPeixe != null) {
+						
+						if(horarioPeixe != null) {							
 							disciplinasParaOMelhor = horarioPeixe.getDisciplinasParaOMelhor();							
-						} else {
+						} 
+						
+						else {
 							Horario horarioMelhorPeixe = this.melhorPeixe.getGrade()[i][j];
+							
 							if(horarioMelhorPeixe != null) {
 								disciplinasParaOMelhor = horarioMelhorPeixe.getDisciplinas();	
 							}
 						}
+						
 						horarioPeixe = swapDisciplinasParaOMelhor(disciplinasParaOMelhor, gradePeixe, horarioPeixe);
+						
 						if(disciplinasParaOMelhor != null && disciplinasParaOMelhor.size() > 0) {
 							countDeslocamentoDisciplinas++;	
 						}
 					}
 				}
+			}
+
+			int qtdDisciplinasFinal = peixe.getQuantidadeDisciplinas();
+			
+			if(qtdDisciplinasInicial != qtdDisciplinasFinal){
+				lancarExcecaoMudancaQtdDisciplinas(qtdDisciplinasInicial,
+						qtdDisciplinasFinal, "movimento coletivo convergente");
 			}
 		}
 	}
@@ -142,18 +178,26 @@ public class Swarm {
 			Horario[][] gradePeixe, Horario horarioPeixe) {
 
 		if(disciplinasParaOMelhor != null && disciplinasParaOMelhor.size() > 0) {
+			
 			if(horarioPeixe == null) {
 				horarioPeixe = new Horario();
 			}
-			for(Disciplina disc : disciplinasParaOMelhor) {
+			for(Disciplina disciplina : disciplinasParaOMelhor) {
+				
 				boolean added = false;
+				
 				for(int i = 0; i < gradePeixe.length; i++) {
+					
 					for(int j = 0; j < gradePeixe[0].length; j++) {
+						
 						Horario tempHorario = gradePeixe[i][j];
+						
 						if(tempHorario != null) {
-							if(tempHorario.getDisciplinas().contains(disc)) {
-								tempHorario.getDisciplinas().remove(disc);
-								horarioPeixe.addDisciplina(disc);
+							
+							if(tempHorario.getDisciplinas().contains(disciplina)) {
+								
+								tempHorario.removeDisciplina(disciplina);
+								horarioPeixe.addDisciplina(disciplina);
 								added = true;
 								break;
 							}		
@@ -169,7 +213,7 @@ public class Swarm {
 		return null;
 	}
 
-	private void movimentoPior() {
+	private void movimentoColetivoDivergente() {
 //		for(Peixe peixe : this.peixes) {
 //			if(peixe != melhorPeixe) {
 //				

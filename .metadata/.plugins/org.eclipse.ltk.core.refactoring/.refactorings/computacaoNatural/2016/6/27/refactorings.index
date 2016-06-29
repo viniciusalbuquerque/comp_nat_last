@@ -1,0 +1,4 @@
+1467213308463	Rename method 'movimentoPior'
+1467213323481	Rename method 'movimentoMelhor'
+1467213563581	Rename local variable 'disc'
+1467217980813	Extract method 'lancarExcecaoMudancaQtdDisciplinas'
