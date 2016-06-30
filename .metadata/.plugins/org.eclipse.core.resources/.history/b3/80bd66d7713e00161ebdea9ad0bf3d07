@@ -62,7 +62,7 @@ public class Swarm {
 	
 	private void move() {
 		movimentoIndividual();
-//		movimentoColetivoDivergente();
+		movimentoColetivoDivergente();
 		movimentoColetivoConvergente();
 	}
 	
@@ -101,7 +101,7 @@ public class Swarm {
 			
 			if(peixe.isBetterFitness(auxPeixe.getFitness())) {
 				peixe = auxPeixe;
-				System.out.println("movimento individual executado");
+				System.out.println("1dsa123213");
 			}	
 			peixe = swapIndividual(peixe);
 			
@@ -433,7 +433,7 @@ public class Swarm {
 			peixe2.calcularFitness();
 			
 			if(peixe.isBetterFitness(peixe2.getFitness())) {
-				System.out.println("Swap individual executado");
+				System.out.println("testetestesteste");
 				peixe = peixe2;
 			}
 //		}

@@ -8,7 +8,6 @@ public class Horario {
 	private ArrayList<Disciplina> disciplinas;
 	private ArrayList<Professor> professores;
 	private ArrayList<Disciplina> disciplinasParaOMelhor;
-	private ArrayList<Disciplina> disciplinasParaOPior;
 	
 	public Horario(){
 		this.disciplinas = new ArrayList<Disciplina>();
@@ -43,15 +42,11 @@ public class Horario {
 		this.disciplinas = disciplinas;
 	}
 	
-	public int distanciaParaMelhor(ArrayList<Disciplina> disciplinasMelhorPeixe) {
-		
+	public int distancia(ArrayList<Disciplina> disciplinasMelhorPeixe) {
 		this.disciplinasParaOMelhor = new ArrayList<>();
 		int dist = 0;
-		
 		for(Disciplina disciplina : disciplinasMelhorPeixe) {
-			
 			if(!this.disciplinas.contains(disciplina)) {
-				
 				this.disciplinasParaOMelhor.add(disciplina);
 				dist++;
 			}
@@ -59,28 +54,8 @@ public class Horario {
 		return dist;
 	}
 	
-	public int distanciaParaPior(ArrayList<Disciplina> disciplinasPiorPeixe) {
-		
-		this.disciplinasParaOPior = new ArrayList<>();
-		int dist = 0;
-		
-		for(Disciplina disciplina : disciplinasPiorPeixe) {
-			
-			if(this.disciplinas.contains(disciplina)) {
-				
-				this.disciplinasParaOPior.add(disciplina);
-				dist++;
-			}
-		}
-		return dist;
-	}
-	
 	public ArrayList<Disciplina> getDisciplinasParaOMelhor() {
-		return this.disciplinasParaOMelhor;
-	}
-	
-	public ArrayList<Disciplina> getDisciplinasParaOPior() {
-		return this.disciplinasParaOPior;
+		return disciplinasParaOMelhor;
 	}
 	
 }

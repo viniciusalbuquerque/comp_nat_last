@@ -62,7 +62,7 @@ public class Swarm {
 	
 	private void move() {
 		movimentoIndividual();
-//		movimentoColetivoDivergente();
+		movimentoColetivoDivergente();
 		movimentoColetivoConvergente();
 	}
 	
@@ -101,7 +101,7 @@ public class Swarm {
 			
 			if(peixe.isBetterFitness(auxPeixe.getFitness())) {
 				peixe = auxPeixe;
-				System.out.println("movimento individual executado");
+				System.out.println("1dsa123213");
 			}	
 			peixe = swapIndividual(peixe);
 			
@@ -147,7 +147,7 @@ public class Swarm {
 //						Main.printPeixe(peixe);
 						
 						if(horarioPeixe != null) {							
-							disciplinasParaOMelhor = horarioPeixe.getDisciplinasParaOMelhor();							
+							disciplinasParaOMelhor = horarioPeixe.getDisciplinasParaOPior();							
 						} 
 						
 						else {
@@ -228,7 +228,7 @@ public class Swarm {
 								addedOuHorarioLotado = true;
 								
 								// Checando limite de salas por horário
-								if(horarioPeixe.getDisciplinas().size() >= Main.numeroSalasDisponiveis){
+								if(horarioPeixe.getDisciplinas().size() == Main.numeroSalasDisponiveis){
 									break;
 								}
 								
@@ -323,51 +323,6 @@ public class Swarm {
 	}
 	
 	
-	private void swapDisciplinasParaOPior(
-			ArrayList<Disciplina> disciplinasParaOPior, Horario[][] gradePeixe,
-			Horario horarioPeixe) {
-		
-		if(disciplinasParaOPior != null && disciplinasParaOPior.size() > 0) {
-			
-			if(horarioPeixe == null) {
-				horarioPeixe = new Horario();
-			}
-			for(Disciplina disciplina : disciplinasParaOPior) {
-				
-				boolean addedOuHorarioLotado = false;
-				
-				for(int i = 0; i < gradePeixe.length; i++) {
-					
-					for(int j = 0; j < gradePeixe[0].length; j++) {
-						
-						Horario tempHorario = gradePeixe[i][j];
-						
-						if(tempHorario != null) {
-							
-							if(!tempHorario.getDisciplinas().contains(disciplina)) {
-								
-								addedOuHorarioLotado = true;
-								
-								// Checando limite de salas por horário
-								if(tempHorario.getDisciplinas().size() >= Main.numeroSalasDisponiveis){
-									break;
-								}
-								
-								tempHorario.addDisciplina(disciplina);
-								horarioPeixe.removeDisciplina(disciplina);
-								break;
-							}		
-						}				
-					}
-					if(addedOuHorarioLotado) {
-						break;
-					}
-				}
-			}
-		}
-		
-	}
-
 	private Peixe swapIndividual(Peixe peixe){
 //		for(Peixe peixe : this.peixes){
 			int coluna1 = Main.generator.nextInt(Main.numeroDiasAula);
@@ -433,7 +388,7 @@ public class Swarm {
 			peixe2.calcularFitness();
 			
 			if(peixe.isBetterFitness(peixe2.getFitness())) {
-				System.out.println("Swap individual executado");
+				System.out.println("testetestesteste");
 				peixe = peixe2;
 			}
 //		}

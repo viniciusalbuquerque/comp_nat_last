@@ -189,36 +189,7 @@ public class Peixe {
 					
 					if(gradeMelhorPeixe[i][j] != null) {
 						
-						dist += horarioPeixe.distanciaParaMelhor(gradeMelhorPeixe[i][j].getDisciplinas());
-					}	
-				} 
-				else {
-					if(gradeMelhorPeixe[i][j] != null) {
-						
-						dist += gradeMelhorPeixe[i][j].getDisciplinas().size();
-					}		
-				}
-			}
-		}
-		return dist;
-	}
-	
-	public int distanciaParaPiorPeixe(Peixe piorPeixe) {
-		
-		int dist = 0;
-		Horario[][] gradeMelhorPeixe = piorPeixe.getGrade();
-		
-		for(int i = 0; i < this.grade.length; i++) {
-			
-			for(int j = 0; j < this.grade[0].length; j++) {
-				
-				Horario horarioPeixe = this.grade[i][j];
-				
-				if(horarioPeixe != null && horarioPeixe.getDisciplinas().size() > 0) {
-					
-					if(gradeMelhorPeixe[i][j] != null) {
-						
-						dist += horarioPeixe.distanciaParaPior(gradeMelhorPeixe[i][j].getDisciplinas());
+						dist += horarioPeixe.distancia(gradeMelhorPeixe[i][j].getDisciplinas());
 					}	
 				} 
 				else {

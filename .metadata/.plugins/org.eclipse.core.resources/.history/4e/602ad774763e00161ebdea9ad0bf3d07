@@ -63,7 +63,7 @@ public class Swarm {
 	private void move() {
 		movimentoIndividual();
 //		movimentoColetivoDivergente();
-		movimentoColetivoConvergente();
+//		movimentoColetivoConvergente();
 	}
 	
 	public ArrayList<Peixe> getPeixes() {

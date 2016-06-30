@@ -9,8 +9,8 @@ public class Main {
 //	private static final String FILENAME = "/Users/Vinicius/Documents/workspace/comp_nat/grade.txt";
 	
 	public static int numeroDiasAula = 3;
-	public static int numeroHorariosPorDia = 5;
-	public static int numeroSalasDisponiveis = 5;
+	public static int numeroHorariosPorDia = 10;
+	public static int numeroSalasDisponiveis = 10;
 	public static int numeroPeixes = 50;
 	public static ArrayList<Professor> professores;
 	public static ArrayList<Disciplina> disciplinas;

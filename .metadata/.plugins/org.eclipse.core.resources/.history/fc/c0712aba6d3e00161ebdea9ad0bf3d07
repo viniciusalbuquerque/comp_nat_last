@@ -10,12 +10,12 @@ public class Main {
 	
 	public static int numeroDiasAula = 3;
 	public static int numeroHorariosPorDia = 5;
-	public static int numeroSalasDisponiveis = 5;
+	public static int numeroSalas = 5;
 	public static int numeroPeixes = 50;
 	public static ArrayList<Professor> professores;
 	public static ArrayList<Disciplina> disciplinas;
 	
-	public static final int NUM_ITERACOES = 10000;
+	public static final int NUM_ITERACOES = 1000;
 //	private static BufferedWriter bw;
 	
 	public static Random generator = new Random();
@@ -23,7 +23,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		inicializarVariaveis();
 		
-		Swarm swarm = new Swarm(numeroPeixes, numeroSalasDisponiveis, disciplinas);
+		Swarm swarm = new Swarm(numeroPeixes, numeroSalas, disciplinas);
 		swarm.start(NUM_ITERACOES);
 		
 //		File file = new File(FILENAME);

@@ -15,7 +15,7 @@ public class Main {
 	public static ArrayList<Professor> professores;
 	public static ArrayList<Disciplina> disciplinas;
 	
-	public static final int NUM_ITERACOES = 10000;
+	public static final int NUM_ITERACOES = 1000;
 //	private static BufferedWriter bw;
 	
 	public static Random generator = new Random();
