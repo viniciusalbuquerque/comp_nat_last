@@ -8,10 +8,10 @@ public class Main {
 
 //	private static final String FILENAME = "/Users/Vinicius/Documents/workspace/comp_nat/grade.txt";
 	
-	public static int numeroDiasAula = 3;
-	public static int numeroHorariosPorDia = 5;
+	public static int numeroDiasAula = 2;
+	public static int numeroHorariosPorDia = 2;
 	public static int numeroSalas = 5;
-	public static int numeroPeixes = 50;
+	public static int numeroPeixes = 10;
 	public static ArrayList<Professor> professores;
 	public static ArrayList<Disciplina> disciplinas;
 	
@@ -32,16 +32,16 @@ public class Main {
         
 		ArrayList<Peixe> peixes = swarm.getPeixes();
 		
-		for(Peixe p : peixes) {
-			printPeixe(p);
-		}
+//		for(Peixe p : peixes) {
+//			printPeixe(p);
+//		}
 		
-//		Peixe p = swarm.getMelhorPeixe();
-//		printPeixe(p);
+		Peixe p = swarm.getMelhorPeixe();
+		printPeixe(p);
 ////		writePeixe(p);
 //		
-//		p = swarm.getPiorPeixe();
-//		printPeixe(p);
+		p = swarm.getPiorPeixe();
+		printPeixe(p);
 //		writePeixe(p);
 		
 //		bw.close();

@@ -38,6 +38,12 @@ public class Horario {
 		return false;
 	}
 	
+	public void addDisciplinas(ArrayList<Disciplina> disciplinas) {
+		for(Disciplina disciplina : disciplinas) {
+			addDisciplina(disciplina);
+		}
+	}
+	
 	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
@@ -56,6 +62,15 @@ public class Horario {
 	
 	public ArrayList<Disciplina> getDisciplinasParaOMelhor() {
 		return disciplinasParaOMelhor;
+	}
+	
+	public void disciplinasDiferentesDoMelhor(ArrayList<Disciplina> melhoresDisciplinas) {
+		this.disciplinasParaOMelhor = new ArrayList<Disciplina>();
+		for(Disciplina disciplina : melhoresDisciplinas) {
+			if(!(this.disciplinas.contains(disciplina))) {
+				this.disciplinasParaOMelhor.add(disciplina);
+			}
+		}
 	}
 	
 }
