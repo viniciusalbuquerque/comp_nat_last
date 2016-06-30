@@ -30,20 +30,18 @@ public class Main {
 //        FileWriter fw = new FileWriter(file.getAbsolutePath());
 //        bw = new BufferedWriter(fw);
         
-//		ArrayList<Peixe> peixes = swarm.getPeixes();
-//		
-//		for(Peixe p : peixes) {
-//			printPeixe(p);
-//		}
+		ArrayList<Peixe> peixes = swarm.getPeixes();
 		
-		System.out.println("Melhor peixe");
-		Peixe p = swarm.getMelhorPeixe();
-		printPeixe(p);
+		for(Peixe p : peixes) {
+			printPeixe(p);
+		}
+		
+//		Peixe p = swarm.getMelhorPeixe();
+//		printPeixe(p);
 ////		writePeixe(p);
 //		
-		System.out.println("Pior peixe");
-		p = swarm.getPiorPeixe();
-		printPeixe(p);
+//		p = swarm.getPiorPeixe();
+//		printPeixe(p);
 //		writePeixe(p);
 		
 //		bw.close();

@@ -144,8 +144,8 @@ public class Swarm {
 						Horario horarioPeixe = gradePeixe[i][j];
 						ArrayList<Disciplina> disciplinasParaOMelhor = new ArrayList<Disciplina>();
 						
-//						System.out.println("\nPeixe inicial:\n");
-//						Main.printPeixe(peixe);
+						System.out.println("\nPeixe inicial:\n");
+						Main.printPeixe(peixe);
 						
 						if(horarioPeixe != null) {							
 							disciplinasParaOMelhor = horarioPeixe.getDisciplinasParaOMelhor();							
@@ -300,14 +300,14 @@ public class Swarm {
 			Peixe peixe2 = new Peixe(peixe.getGrade().clone());
 //			Peixe peixe2 = peixe;
 			if(disciplinas1.isEmpty()) {
-				peixe2.getGrade()[linha1][coluna1] = new Horario();
+				peixe2.getGrade()[linha1][coluna1] = null;
 			} else {
 				horario.setDisciplinas(disciplinas1);
 				peixe2.getGrade()[linha1][coluna1] = horario;
 			}
 			
 			if(disciplinas2.isEmpty()) {
-				peixe2.getGrade()[linha2][coluna2] = new Horario();
+				peixe2.getGrade()[linha2][coluna2] = null;
 			} else {
 				horario2.setDisciplinas(disciplinas2);
 				peixe2.getGrade()[linha2][coluna2] = horario2;

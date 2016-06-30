@@ -144,8 +144,8 @@ public class Swarm {
 						Horario horarioPeixe = gradePeixe[i][j];
 						ArrayList<Disciplina> disciplinasParaOMelhor = new ArrayList<Disciplina>();
 						
-//						System.out.println("\nPeixe inicial:\n");
-//						Main.printPeixe(peixe);
+						System.out.println("\nPeixe inicial:\n");
+						Main.printPeixe(peixe);
 						
 						if(horarioPeixe != null) {							
 							disciplinasParaOMelhor = horarioPeixe.getDisciplinasParaOMelhor();							

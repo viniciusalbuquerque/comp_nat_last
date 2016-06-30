@@ -36,14 +36,12 @@ public class Main {
 //			printPeixe(p);
 //		}
 		
-		System.out.println("Melhor peixe");
-		Peixe p = swarm.getMelhorPeixe();
-		printPeixe(p);
+//		Peixe p = swarm.getMelhorPeixe();
+//		printPeixe(p);
 ////		writePeixe(p);
 //		
-		System.out.println("Pior peixe");
-		p = swarm.getPiorPeixe();
-		printPeixe(p);
+//		p = swarm.getPiorPeixe();
+//		printPeixe(p);
 //		writePeixe(p);
 		
 //		bw.close();
